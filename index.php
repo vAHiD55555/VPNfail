@@ -166,7 +166,9 @@ function processResults($results){
 $html = openLink("https://vpn.fail/free-proxy/type/v2ray");
 
 $results = extractArticleData($html);
+$processResults = processResults($results);
 
 // Print the results
 file_put_contents("api.json", json_encode($results, JSON_PRETTY_PRINT));
-file_put_contents("subscription", processResults($results));
+file_put_contents("subscription/plain", $processResults);
+file_put_contents("subscription/base64", base64_encode($processResults));
